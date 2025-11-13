@@ -1,10 +1,27 @@
 micronaut:
   application:
     name: soar-maps-api-example
+  server:
+    port: ${PORT:8080}
+    cors:
+      enabled: true
+
 datasources:
   default:
-    url: jdbc:postgresql://localhost:5432/soar
+    url: ${JDBC_URL:`jdbc:postgresql://localhost:5432/soar`}
     driverClassName: org.postgresql.Driver
-    username: your_username
-    password: "your_password"
+    username: ${DB_USERNAME:`your_username`}
+    password: ${DB_PASSWORD:`your_password`}
+    maximum-pool-size: 10
+
+jackson:
+  serialization:
+    indentOutput: true
+    writeDatesAsTimestamps: false
+
+logger:
+  levels:
+    com.example: INFO
+    io.micronaut: INFO
+
 

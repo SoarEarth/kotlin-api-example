@@ -1,45 +1,54 @@
-.gradle
+# Gradle
+.gradle/
 build/
 !gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
+*.sw?
+.#*
+*#
+*~
+.classpath
+.project
+.settings/
+bin/
+target/
+.gradletasknamecache
 
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
+# IntelliJ IDEA
+.idea/
 *.iml
 *.ipr
+*.iws
 out/
-!**/src/main/**/out/
-!**/src/test/**/out/
 
-### Kotlin ###
-.kotlin
+# Eclipse
+.metadata
+.recommenders
+.apt_generated/
 
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
+# NetBeans
+nbproject/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-### VS Code ###
+# VS Code
 .vscode/
 
-### Mac OS ###
+# Mac
 .DS_Store
+
+# Logs
+logs/
+*.log
+application.log
+
+# Application specific
+application-local.yml
+*.env
+.env.local
+
+# Test results
+test-results/
+*.class
+
