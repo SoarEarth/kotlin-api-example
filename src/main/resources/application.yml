@@ -1,0 +1,10 @@
+micronaut:
+  application:
+    name: soar-maps-api-example
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/soar
+    driverClassName: org.postgresql.Driver
+    username: your_username
+    password: "your_password"
+
