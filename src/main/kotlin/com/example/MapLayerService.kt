@@ -33,47 +33,6 @@ class MapLayerService(private val mapLayerRepository: MapLayerRepository) {
     }
 
     /**
-     * Create a new map layer.
-     *
-     * @param request The create request containing layer data
-     * @return The created map layer
-     */
-    fun createMapLayer(request: CreateMapLayerRequest): MapLayer {
-        logger.info("Creating new map layer: ${request.name}")
-
-        val mapLayer = MapLayer(
-            name = request.name,
-            geom = request.geom
-        )
-
-        val saved = mapLayerRepository.save(mapLayer)
-        logger.info("Created map layer with id: ${saved.id}")
-
-        return saved
-    }
-
-    /**
-     * Find all map layers.
-     *
-     * @return List of all map layers
-     */
-    fun findAll(): List<MapLayer> {
-        logger.debug("Finding all map layers")
-        return mapLayerRepository.findAll().toList()
-    }
-
-    /**
-     * Find a map layer by ID.
-     *
-     * @param id The layer ID
-     * @return The map layer if found
-     */
-    fun findById(id: Long): MapLayer? {
-        logger.debug("Finding map layer by id: $id")
-        return mapLayerRepository.findById(id).orElse(null)
-    }
-
-    /**
      * Validate that coordinates are within valid ranges.
      */
     private fun validateCoordinates(latitude: Double, longitude: Double) {

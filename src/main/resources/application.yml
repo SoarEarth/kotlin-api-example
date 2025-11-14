@@ -1,6 +1,6 @@
 micronaut:
   application:
-    name: soar-maps-api-example
+    name: kotlin-api-example
   server:
     port: ${PORT:8080}
     cors:

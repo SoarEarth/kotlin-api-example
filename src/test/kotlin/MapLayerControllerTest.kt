@@ -58,31 +58,5 @@ class MapLayerControllerTest {
         }
     }
 
-    @Test
-    fun `test get all layers endpoint`() {
-        val request = HttpRequest.GET<List<MapLayerDto>>("/api/v1/map-layers")
-        val response = client.toBlocking().exchange(request, List::class.java)
-
-        assertEquals(HttpStatus.OK, response.status)
-        assertNotNull(response.body())
-    }
-
-    @Test
-    fun `test create layer endpoint`() {
-        val createRequest = CreateMapLayerRequest(
-            name = "Test Layer",
-            geom = "POLYGON((0 0, 0 10, 10 10, 10 0, 0 0))"
-        )
-
-        val request = HttpRequest.POST("/api/v1/map-layers", createRequest)
-        val response = client.toBlocking().exchange(request, MapLayerDto::class.java)
-
-        assertEquals(HttpStatus.CREATED, response.status)
-        assertNotNull(response.body())
-
-        val created = response.body()!!
-        assertEquals("Test Layer", created.name)
-        assertNotNull(created.id)
-    }
 }
 

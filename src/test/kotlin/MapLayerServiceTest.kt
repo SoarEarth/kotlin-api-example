@@ -50,42 +50,5 @@ class MapLayerServiceTest {
         assertEquals(expectedLayers, result)
         verify(mockRepository).findContaining(25.0, 22.0)
     }
-
-    @Test
-    fun `createMapLayer should save layer to repository`() {
-        val request = CreateMapLayerRequest(
-            name = "Test Layer",
-            geom = "POLYGON((0 0, 0 10, 10 10, 10 0, 0 0))"
-        )
-
-        val savedLayer = MapLayer(1L, request.name, request.geom)
-        whenever(mockRepository.save(any(MapLayer::class.java))).thenReturn(savedLayer)
-
-        val result = service.createMapLayer(request)
-
-        assertEquals(1L, result.id)
-        assertEquals("Test Layer", result.name)
-        verify(mockRepository).save(any(MapLayer::class.java))
-    }
-
-    @Test
-    fun `findById should return layer when exists`() {
-        val layer = MapLayer(1L, "Test", "POLYGON((0 0, 0 10, 10 10, 10 0, 0 0))")
-        whenever(mockRepository.findById(1L)).thenReturn(Optional.of(layer))
-
-        val result = service.findById(1L)
-
-        assertNotNull(result)
-        assertEquals(1L, result?.id)
-    }
-
-    @Test
-    fun `findById should return null when not exists`() {
-        whenever(mockRepository.findById(999L)).thenReturn(Optional.empty())
-
-        val result = service.findById(999L)
-
-        assertNull(result)
-    }
 }
 

@@ -60,66 +60,6 @@ class MapLayerController(private val mapLayerService: MapLayerService) {
         }
     }
 
-    /**
-     * Get all map layers.
-     *
-     * @return List of all map layers
-     */
-    @Get
-    fun getAllLayers(): HttpResponse<List<MapLayerDto>> {
-        return try {
-            logger.debug("Fetching all map layers")
-            val layers = mapLayerService.findAll()
-            val dtos = layers.map { MapLayerDto.from(it) }
-            HttpResponse.ok(dtos)
-        } catch (e: Exception) {
-            logger.error("Error fetching all layers", e)
-            HttpResponse.serverError()
-        }
-    }
-
-    /**
-     * Get a specific map layer by ID.
-     *
-     * @param id The layer ID
-     * @return The map layer if found
-     */
-    @Get("/{id}")
-    fun getLayerById(@PathVariable id: Long): HttpResponse<MapLayerDto> {
-        return try {
-            logger.debug("Fetching layer with id: $id")
-            val layer = mapLayerService.findById(id)
-
-            if (layer != null) {
-                HttpResponse.ok(MapLayerDto.from(layer))
-            } else {
-                logger.warn("Layer not found with id: $id")
-                HttpResponse.notFound()
-            }
-        } catch (e: Exception) {
-            logger.error("Error fetching layer by id: $id", e)
-            HttpResponse.serverError()
-        }
-    }
-
-    /**
-     * Create a new map layer.
-     *
-     * @param request The layer creation request
-     * @return The created layer
-     */
-    @Post
-    @Status(HttpStatus.CREATED)
-    fun createLayer(@Body @Valid request: CreateMapLayerRequest): HttpResponse<MapLayerDto> {
-        return try {
-            logger.info("Creating new map layer: ${request.name}")
-            val created = mapLayerService.createMapLayer(request)
-            HttpResponse.created(MapLayerDto.from(created))
-        } catch (e: Exception) {
-            logger.error("Error creating layer", e)
-            HttpResponse.serverError()
-        }
-    }
 }
 
 
